@@ -1,0 +1,118 @@
+<div class="container">
+    <div class="row pt-3">
+        <div class="col-6">
+            <h4>student portal</h4>
+        </div>
+        <div class="col-6 text-end">
+            <button class="btn btn-outline-success" (click)="openModel()">Add New</button>
+        </div>
+    </div>
+
+    @if(studentlist.length!==0){
+    <div class="row">
+<!-- use ng for another one method introducet angular for -->
+        <div class="col-3" *ngFor="let item of studentlist;track $index" >
+            <div class=" card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-6">
+                           {{item.name}}
+                        </div>
+                        <div class="col-6">
+                           {{item.mobileNo}}
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="card-body">
+                   
+                    <p>{{item.city}} , {{item.state}} , {{item.pincode}}</p>
+                    <p>{{item.address}}</p>
+                </div>
+                <div class="card-footer text-center">
+                    <div class="row">
+                        <div class="col-7">
+                           <small><p>{{item.email}}</p></small>
+                        </div>
+                        <div class="col-4">
+                            <button class=" btn btn-sm btn-primary" (click)="onedit(item)"> Edit</button>
+                            <button class=" btn btn-sm btn-danger" (click)="ondelete(item)"> Delete</button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+}@else{
+<div class="row">
+    <div class="col-12 p-4 text-center" >
+        <p>no record found create new record</p>
+    </div>
+</div>
+}
+</div>
+
+
+
+
+
+<div class="modal" id="myModal" #myModal>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">create new student</h4>
+          <button type="button" class="btn-close" (click)="closeModel()"></button>
+        </div>
+        <div class="modal-body">
+        <div class="row">
+            <div class="col-8">
+                <label>name</label>
+                <input type="text" [(ngModel)]="studentObj.name" class="form-control-sm" placeholder="name">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label>mobile No</label>
+                <input type="text" [(ngModel)]="studentObj.mobileNo" class="form-control-sm" placeholder="mobile">
+            </div>
+            <div class="col-6">
+                <label>email</label>
+                <input type="text" [(ngModel)]="studentObj.email"  class="form-control-sm" placeholder="email">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <label>city</label>
+                <input type="text" [(ngModel)]="studentObj.city" class="form-control-sm" placeholder="city">
+            </div>
+            <div class="col-4">
+                <label>state</label>
+                <input type="text" [(ngModel)]="studentObj.state"  class="form-control-sm" placeholder="state">
+            </div>
+            <div class="col-4">
+                <label>pincode</label>
+                <input type="text" [(ngModel)]="studentObj.pincode" class="form-control" placeholder="pin code">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label>address</label>
+                <textarea rows="3" [(ngModel)]="studentObj.address" class="form-control"></textarea>
+            </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+          @if(studentObj.id == 0){
+            <button type="button" class="btn btn-primary" (click)="saveStudent()">save student</button>
+          }@else{
+            <button type="button" class="btn btn-success" (click)="updateStudent()">Update student</button>
+          }
+          
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
